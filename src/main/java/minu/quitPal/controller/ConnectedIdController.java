@@ -14,10 +14,7 @@ import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -32,6 +29,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/connected-id")
 public class ConnectedIdController {
 
     private final EasyCodef easyCodef;
@@ -40,7 +38,7 @@ public class ConnectedIdController {
 
     private final ConnectedInfoService connectedInfoService;
 
-    @PostMapping("/connected-id")
+    @PostMapping
     public ResponseEntity<String> createConnectedId(
             @RequestBody HashMap<String, Object> accountInfo
     ) throws IOException, InterruptedException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeySpecException, BadPaddingException, InvalidKeyException, ParseException {
@@ -78,7 +76,7 @@ public class ConnectedIdController {
 
     }
 
-    @DeleteMapping("/connected-id")
+    @DeleteMapping
     public ResponseEntity<String> deleteConnectedId(@RequestBody HashMap<String, Object> accountInfo) throws IOException, InterruptedException {
         HashMap<String, Object> requestMap = new HashMap<>();
         List<HashMap<String, Object>> accountList = (List<HashMap<String, Object>>) accountInfo.get("accountList");
@@ -88,4 +86,5 @@ public class ConnectedIdController {
 
         return ResponseEntity.ok(easyCodef.deleteAccount(EasyCodefServiceType.DEMO, requestMap));
     }
+
 }
