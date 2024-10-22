@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-public class TokenController {
+public class CodefTokenController {
 
     private final CodefTokenService codefTokenService;
 

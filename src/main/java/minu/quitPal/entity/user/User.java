@@ -1,10 +1,13 @@
 package minu.quitPal.entity.user;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import minu.quitPal.entity.Transaction;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,10 +26,27 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
+    @CreationTimestamp
+    @Setter
+    private LocalDate joinDate;
+
+    @Setter
+    private String expoPushToken;
+
+    @OneToMany(mappedBy = "user")
+    private List<Transaction> transactions = new ArrayList<>();
+
+    /* ------------------- */
+
     @Builder
     public User(String email, String password, Authority authority) {
         this.email = email;
         this.password = password;
         this.authority = authority;
     }
+
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
+    }
+
 }
