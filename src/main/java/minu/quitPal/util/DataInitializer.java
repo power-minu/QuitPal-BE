@@ -1,4 +1,4 @@
-package minu.quitPal;
+package minu.quitPal.util;
 
 import lombok.RequiredArgsConstructor;
 import minu.quitPal.entity.Transaction;

@@ -1,6 +1,7 @@
 package minu.quitPal.repository;
 
 import minu.quitPal.entity.Transaction;
+import minu.quitPal.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
      */
 
     List<Transaction> findByCheckedAndExpired(boolean checked, boolean expired);
+
+    List<Transaction> findByUser(User user);
 
 }

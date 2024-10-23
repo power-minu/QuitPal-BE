@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Service
 public class NotificationService {
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void sendNotification(User user, String message) {

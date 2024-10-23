@@ -48,10 +48,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
     private static final String[] AUTH_WHITELIST = {
-            "/token", "/auth/**", "/error", "/notification"
+            "/codef/token", "/auth/**", "/error", "/notification", "/demo/noti"
     };
     private static final String[] AUTH_REQ_LIST = {
-            "/user/me", "/connected-id/**", "/trans", "/user/push-token"
+            "/user/me", "/codef/connected-id/**", "/codef/trans", "/user/push-token", "/transaction/**"
     };
 
     @Bean

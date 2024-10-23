@@ -1,15 +1,13 @@
-package minu.quitPal.controller;
+package minu.quitPal.controller.codef;
 
 import lombok.RequiredArgsConstructor;
 import minu.quitPal.codef.api.EasyCodef;
 import minu.quitPal.codef.api.EasyCodefProperties;
 import minu.quitPal.codef.api.EasyCodefServiceType;
 import minu.quitPal.codef.api.EasyCodefUtil;
-import minu.quitPal.config.SecurityUtil;
-import minu.quitPal.dto.UserResponseDto;
+import minu.quitPal.util.SecurityUtil;
 import minu.quitPal.entity.user.ConnectedInfo;
 import minu.quitPal.service.ConnectedInfoService;
-import minu.quitPal.service.UserService;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -29,7 +27,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/connected-id")
+@RequestMapping("/codef/connected-id")
 public class ConnectedIdController {
 
     private final EasyCodef easyCodef;

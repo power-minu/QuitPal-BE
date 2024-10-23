@@ -1,4 +1,4 @@
-package minu.quitPal.controller;
+package minu.quitPal.controller.codef;
 
 import lombok.RequiredArgsConstructor;
 import minu.quitPal.service.CodefTokenService;
@@ -14,7 +14,7 @@ public class CodefTokenController {
 
     private final CodefTokenService codefTokenService;
 
-    @GetMapping("/token")
+    @GetMapping("/codef/token")
     public ResponseEntity<String> getToken() throws IOException {
         return ResponseEntity.ok(codefTokenService.getCodefAccessToken());
     }

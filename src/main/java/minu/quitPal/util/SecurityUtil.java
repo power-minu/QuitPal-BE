@@ -1,4 +1,4 @@
-package minu.quitPal.config;
+package minu.quitPal.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package minu.quitPal.controller;
+package minu.quitPal.controller.codef;
 
 import lombok.RequiredArgsConstructor;
 import minu.quitPal.codef.api.EasyCodef;
@@ -12,7 +12,6 @@ import minu.quitPal.repository.ConnectedInfoRepository;
 import minu.quitPal.repository.UserRepository;
 import minu.quitPal.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-public class AccountTransactionController {
+public class CodefTransactionController {
 
     private final EasyCodef easyCodef;
     private final EasyCodefUtil easyCodefUtil;
@@ -38,7 +37,7 @@ public class AccountTransactionController {
     private final UserRepository userRepository;
     private final ConnectedInfoRepository connectedInfoRepository;
 
-    @PostMapping("/trans")
+    @PostMapping("/codef/trans")
     public ResponseEntity<String> getAccountTransactionHistory(@RequestBody HashMap<String, Object> params) throws IOException, InterruptedException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeySpecException, BadPaddingException, InvalidKeyException {
         params.replace("accountPassword", easyCodefUtil.encryptRSA((String) params.get("accountPassword"), properties.getPublicKey()));
 

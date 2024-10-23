@@ -1,7 +1,7 @@
 package minu.quitPal.service;
 
 import lombok.RequiredArgsConstructor;
-import minu.quitPal.config.SecurityUtil;
+import minu.quitPal.util.SecurityUtil;
 import minu.quitPal.dto.UserResponseDto;
 import minu.quitPal.entity.user.User;
 import minu.quitPal.repository.UserRepository;
