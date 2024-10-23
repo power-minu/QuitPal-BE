@@ -48,7 +48,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
     private static final String[] AUTH_WHITELIST = {
-            "/codef/token", "/auth/**", "/error", "/notification", "/demo/noti"
+            "/codef/token", "/auth/**", "/error", "/notification", "/demo/noti", "/image"
     };
     private static final String[] AUTH_REQ_LIST = {
             "/user/me", "/codef/connected-id/**", "/codef/trans", "/user/push-token", "/transaction/**"
