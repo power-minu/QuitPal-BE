@@ -54,6 +54,7 @@ public class ConnectedIdController {
 
         String responseAccount = easyCodef.createAccount(EasyCodefServiceType.DEMO, requestMap);
 
+        System.out.println("responseAccount = " + responseAccount);
         JSONParser jsonParser = new JSONParser();
         Object parsed = jsonParser.parse(responseAccount);
         JSONObject jsonObject = (JSONObject) parsed;

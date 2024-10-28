@@ -60,9 +60,9 @@ public class DataInitializer implements CommandLineRunner {
         transactionRepository.save(transaction2);
 
         Transaction transaction3 = Transaction.builder()
-                .place("상수지에스")
-                .amount(10000)
-                .purchaseDate(LocalDate.of(2024, 10, 16))
+                .place("세븐일레븐문정수정")
+                .amount(13820)
+                .purchaseDate(LocalDate.of(2020, 6, 9))
                 .build();
         transaction3.assignUser(mw);
         transactionRepository.save(transaction3);
