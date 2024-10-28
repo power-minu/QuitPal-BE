@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ConnectedInfo {
+public class CodefConnectedId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +21,9 @@ public class ConnectedInfo {
     private String connectedId;
 
     @Builder
-    public ConnectedInfo(User user, String connectedId) {
+    public CodefConnectedId(User user, String connectedId) {
         this.user = user;
         this.connectedId = connectedId;
     }
+
 }

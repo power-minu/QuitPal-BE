@@ -22,6 +22,7 @@ public class User {
     private String email;
 
     private String password;
+    private String birthDate;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
@@ -39,10 +40,11 @@ public class User {
     /* ------------------- */
 
     @Builder
-    public User(String email, String password, Authority authority) {
+    public User(String email, String password, Authority authority, String birthDate) {
         this.email = email;
         this.password = password;
         this.authority = authority;
+        this.birthDate = birthDate;
     }
 
     public void addTransaction(Transaction transaction) {

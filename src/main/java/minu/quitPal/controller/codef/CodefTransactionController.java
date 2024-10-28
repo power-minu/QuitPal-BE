@@ -6,12 +6,15 @@ import minu.quitPal.codef.api.EasyCodefProperties;
 import minu.quitPal.codef.api.EasyCodefServiceType;
 import minu.quitPal.codef.api.EasyCodefUtil;
 import minu.quitPal.dto.UserResponseDto;
-import minu.quitPal.entity.user.ConnectedInfo;
+import minu.quitPal.entity.user.BankAccount;
+import minu.quitPal.entity.user.CodefConnectedId;
 import minu.quitPal.entity.user.User;
-import minu.quitPal.repository.ConnectedInfoRepository;
+import minu.quitPal.repository.BankAccountRepository;
+import minu.quitPal.repository.CodefConnectedIdRepository;
 import minu.quitPal.repository.UserRepository;
 import minu.quitPal.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,21 +34,30 @@ import java.util.Optional;
 public class CodefTransactionController {
 
     private final EasyCodef easyCodef;
-    private final EasyCodefUtil easyCodefUtil;
-    private final EasyCodefProperties properties;
     private final UserService userService;
     private final UserRepository userRepository;
-    private final ConnectedInfoRepository connectedInfoRepository;
+    private final CodefConnectedIdRepository codefConnectedIdRepository;
+    private final BankAccountRepository bankAccountRepository;
 
-    @PostMapping("/codef/trans")
-    public ResponseEntity<String> getAccountTransactionHistory(@RequestBody HashMap<String, Object> params) throws IOException, InterruptedException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeySpecException, BadPaddingException, InvalidKeyException {
-        params.replace("accountPassword", easyCodefUtil.encryptRSA((String) params.get("accountPassword"), properties.getPublicKey()));
-
+    @GetMapping("/codef/trans/onetouch")
+    public ResponseEntity<String> getAccountTransactionHistoryOneTouch() throws IOException, InterruptedException {
+        HashMap<String, Object> params = new HashMap<>();
         UserResponseDto myInfoBySecurity = userService.getMyInfoBySecurity();
-        Optional<User> loggedInUser = userRepository.findUserByEmail(myInfoBySecurity.getEmail());
-        Optional<ConnectedInfo> connectedInfoByUser = connectedInfoRepository.findConnectedInfoByUser(loggedInUser.get());
+        User loggedInUser = userRepository.findUserByEmail(myInfoBySecurity.getEmail()).orElseThrow(() -> new RuntimeException("유저 못찾았어요."));
+        CodefConnectedId connectedInfoByUser = codefConnectedIdRepository.findCodefConnectedIdByUser(loggedInUser).orElseThrow(() -> new RuntimeException("커넥티드아이디를 못찾았다."));
+        BankAccount bankAccount = bankAccountRepository.findByCodefConnectedId(connectedInfoByUser).orElseThrow(() -> new RuntimeException("계좌 못찾았다."));
+        String account = bankAccount.getAccountNumber();
+        String accountPassword = bankAccount.getAccountPassword();
 
-        params.put("connectedId", connectedInfoByUser.get().getConnectedId());
+        params.put("organization", "0004");
+        params.put("startDate", "20241021");
+        params.put("endDate", "20241028");
+        params.put("orderBy", "0");
+        params.put("inquiryType", "0");
+        params.put("account", account);
+        params.put("accountPassword", accountPassword);
+        params.put("birthDate", loggedInUser.getBirthDate());
+        params.put("connectedId", connectedInfoByUser.getConnectedId());
 
         String result = easyCodef.requestProduct("/v1/kr/bank/p/account/transaction-list", EasyCodefServiceType.DEMO, params);
         return ResponseEntity.ok(result);

@@ -1,6 +1,7 @@
 package minu.quitPal.util;
 
 import lombok.RequiredArgsConstructor;
+import minu.quitPal.codef.api.EasyCodefProperties;
 import minu.quitPal.entity.Transaction;
 import minu.quitPal.entity.user.Authority;
 import minu.quitPal.entity.user.User;
@@ -29,12 +30,14 @@ public class DataInitializer implements CommandLineRunner {
                 .email("admin@example.com")
                 .password(passwordEncoder.encode("admin"))
                 .authority(Authority.ROLE_ADMIN)
+                .birthDate("700101")
                 .build();
 
         User mw = User.builder()
                 .email("mw0677@naver.com")
                 .password(passwordEncoder.encode("alsdn1"))
                 .authority(Authority.ROLE_USER)
+                .birthDate("000706")
                 .build();
 
         userRepository.save(user1);

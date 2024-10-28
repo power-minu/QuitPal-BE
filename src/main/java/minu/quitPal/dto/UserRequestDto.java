@@ -17,11 +17,13 @@ public class UserRequestDto {
 
     private String email;
     private String password;
+    private String birthDate;
 
     public User toUser(PasswordEncoder passwordEncoder) {
         return User.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
+                .birthDate(birthDate)
                 .authority(Authority.ROLE_USER)
                 .build();
     }

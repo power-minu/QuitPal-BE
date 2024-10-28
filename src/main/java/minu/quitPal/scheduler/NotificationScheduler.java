@@ -19,7 +19,7 @@ public class NotificationScheduler {
     private final TransactionRepository transactionRepository;
     private final NotificationService notificationService;
 
-    @Scheduled(cron = "0 0 9 * * ?")
+    @Scheduled(cron = "0 10 9 * * ?")
     public void sendDailyNotifications() {
         // checked가 false인 모든 Transaction을 가져옵니다.
         List<Transaction> uncheckedTransactions = transactionRepository.findByCheckedAndExpired(false, false);

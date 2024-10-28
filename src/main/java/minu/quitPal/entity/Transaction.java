@@ -5,6 +5,7 @@ import lombok.*;
 import minu.quitPal.entity.user.User;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -18,16 +19,18 @@ public class Transaction {
     private String place;
     private int amount;
     private LocalDate purchaseDate;
+    private LocalTime purchaseTime;
     @Setter
     private boolean checked = false;
     @Setter
     private boolean expired = false;
 
     @Builder
-    public Transaction(String place, int amount, LocalDate purchaseDate) {
+    public Transaction(String place, int amount, LocalDate purchaseDate, LocalTime purchaseTime) {
         this.place = place;
         this.amount = amount;
         this.purchaseDate = purchaseDate;
+        this.purchaseTime = purchaseTime;
     }
 
     @ManyToOne
