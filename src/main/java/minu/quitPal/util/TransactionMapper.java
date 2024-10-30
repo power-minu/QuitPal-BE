@@ -1,4 +1,4 @@
-package minu.quitPal;
+package minu.quitPal.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

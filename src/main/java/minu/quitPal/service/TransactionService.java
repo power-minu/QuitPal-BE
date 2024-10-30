@@ -8,6 +8,7 @@ import minu.quitPal.repository.TransactionRepository;
 import minu.quitPal.repository.UserRepository;
 import minu.quitPal.util.SecurityUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,4 +25,12 @@ public class TransactionService {
 
         return transactions.stream().map(TransactionResponse::from).toList();
     }
+
+    @Transactional
+    public Long checkTransaction(Long id) {
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(() -> new RuntimeException("거래 찾기 실패"));
+        transaction.setChecked(true);
+        return transaction.getId();
+    }
+
 }

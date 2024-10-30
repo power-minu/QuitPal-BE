@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Data
 public class TransactionResponse {
 
+    private Long id;
     private String place;
     private int amount;
     private LocalDate purchaseDate;
@@ -17,7 +18,8 @@ public class TransactionResponse {
     private boolean expired;
 
     @Builder
-    private TransactionResponse(String place, int amount, LocalDate purchaseDate, boolean checked, boolean expired) {
+    private TransactionResponse(Long id, String place, int amount, LocalDate purchaseDate, boolean checked, boolean expired) {
+        this.id = id;
         this.place = place;
         this.amount = amount;
         this.purchaseDate = purchaseDate;
@@ -27,6 +29,7 @@ public class TransactionResponse {
 
     public static TransactionResponse from(Transaction transaction) {
         return TransactionResponse.builder()
+                .id(transaction.getId())
                 .place(transaction.getPlace())
                 .amount(transaction.getAmount())
                 .purchaseDate(transaction.getPurchaseDate())

@@ -1,7 +1,6 @@
 package minu.quitPal.util;
 
 import lombok.RequiredArgsConstructor;
-import minu.quitPal.codef.api.EasyCodefProperties;
 import minu.quitPal.entity.Transaction;
 import minu.quitPal.entity.user.Authority;
 import minu.quitPal.entity.user.User;
@@ -69,6 +68,22 @@ public class DataInitializer implements CommandLineRunner {
                 .build();
         transaction3.assignUser(mw);
         transactionRepository.save(transaction3);
+
+        Transaction transaction4 = Transaction.builder()
+                .place("테스트가게이름1")
+                .amount(100000)
+                .purchaseDate(LocalDate.of(2000, 7, 6))
+                .build();
+        transaction4.assignUser(mw);
+        transactionRepository.save(transaction4);
+
+        Transaction transaction5 = Transaction.builder()
+                .place("테스트가게이름2")
+                .amount(300000)
+                .purchaseDate(LocalDate.of(1999, 12, 23))
+                .build();
+        transaction5.assignUser(mw);
+        transactionRepository.save(transaction5);
 
         System.out.println("Dummy data initialization completed.");
     }
